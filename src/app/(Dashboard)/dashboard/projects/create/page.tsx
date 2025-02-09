@@ -5,38 +5,38 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 const AddProjectPage = () => {
-    const [title, setTitle] = useState("");
-    const [description, setDescription] = useState("");
-    const [liveLink, setLiveLink] = useState("");
-    const [image, setImage] = useState("");
-    const [errors, setErrors] = useState<any>({});
+    const [project, setProject] = useState({
+        title: "",
+        description: "",
+        liveLink: "",
+        image: ""
+    });
     const router = useRouter();
 
-    const handleSubmit = (e: React.FormEvent) => {
+     
+    const handleChange = (e: any) => {
+        setProject({ ...project, [e.target.name]: e.target.value });
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        let formErrors: any = {};
-
-        // Basic validation
-        if (!title) formErrors.title = "Title is required.";
-        if (!description) formErrors.description = "Description is required.";
-        if (!liveLink) formErrors.liveLink = "Live Link is required.";
-        if (!image) formErrors.image = "Image URL is required.";
-
-        if (Object.keys(formErrors).length > 0) {
-            setErrors(formErrors);
-            return;
+        const res = await fetch(`http://localhost:5000/api/projects/create-project`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(project),
+        });
+        if (res.ok) {
+            alert("Project created successfully!");
+            // Optionally redirect after updating
+            router.push("/dashboard/projects");
+        } else {
+            alert("Failed to create project.");
         }
 
-        // If no errors, log the data (You can replace this with an API request to save the data)
-        console.log({
-            title,
-            description,
-            liveLink,
-            image,
-        });
-
         // Redirect to manage projects page (or wherever you want)
-        router.push("/projects/manage");
+        router.push("/dashboard/projects");
     };
 
     return (
@@ -55,11 +55,10 @@ const AddProjectPage = () => {
                         <input
                             type="text"
                             id="title"
-                            value={title}
-                            onChange={(e) => setTitle(e.target.value)}
+                            name="title"
+                            onChange={handleChange}
                             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500 dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600"
                         />
-                        {errors.title && <p className="text-red-500 text-xs mt-1">{errors.title}</p>}
                     </div>
 
                     <div className="mb-6">
@@ -68,12 +67,11 @@ const AddProjectPage = () => {
                         </label>
                         <textarea
                             id="description"
-                            value={description}
-                            onChange={(e) => setDescription(e.target.value)}
+                            name="description"
+                            onChange={handleChange}
                             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500 dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600"
                             rows={4}
                         />
-                        {errors.description && <p className="text-red-500 text-xs mt-1">{errors.description}</p>}
                     </div>
 
                     <div className="mb-6">
@@ -83,11 +81,10 @@ const AddProjectPage = () => {
                         <input
                             type="url"
                             id="liveLink"
-                            value={liveLink}
-                            onChange={(e) => setLiveLink(e.target.value)}
+                            name="liveLink"
+                            onChange={handleChange}
                             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500 dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600"
                         />
-                        {errors.liveLink && <p className="text-red-500 text-xs mt-1">{errors.liveLink}</p>}
                     </div>
 
                     <div className="mb-6">
@@ -97,11 +94,10 @@ const AddProjectPage = () => {
                         <input
                             type="text"
                             id="image"
-                            value={image}
-                            onChange={(e) => setImage(e.target.value)}
+                            name="image"
+                            onChange={handleChange}
                             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500 dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600"
                         />
-                        {errors.image && <p className="text-red-500 text-xs mt-1">{errors.image}</p>}
                     </div>
 
                     {/* Submit Button */}

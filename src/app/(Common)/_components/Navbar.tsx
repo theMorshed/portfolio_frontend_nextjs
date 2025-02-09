@@ -14,7 +14,6 @@ type UserProps = {
 
 const Navbar = ({session}: {session: UserProps | null}) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    console.log(session);
     // Toggle mobile menu
     const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 

@@ -2,55 +2,53 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 
-const EditProjectPage = ({ params }: { params: { projectId: string } }) => {
-    const [title, setTitle] = useState("");
-    const [description, setDescription] = useState("");
-    const [liveLink, setLiveLink] = useState("");
-    const [image, setImage] = useState("");
-    const [errors, setErrors] = useState<any>({});
+const EditProjectPage = () => {
     const router = useRouter();
+    // const {projectId}: any = use(params);
+    const {projectId} = useParams();
+    const [project, setProject] = useState({
+        title: "",
+        description: "",
+        liveLink: "",
+        image: ""
+    });
 
     // Fetch project data for editing
     useEffect(() => {
         const fetchProject = async () => {
             // Example of fetching project data from API (you'll replace this with actual API call)
-            const response = await fetch(`/api/projects/${params.projectId}`);
-            const project = await response.json();
-
-            setTitle(project.title);
-            setDescription(project.description);
-            setLiveLink(project.liveLink);
-            setImage(project.image);
+            const response = await fetch(`http://localhost:5000/api/projects/${projectId}`);
+            const data = await response.json();
+            if (data?.success) {
+                setProject(data?.data);            
+            }
         };
 
         fetchProject();
-    }, [params.projectId]);
+    }, [projectId]);
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleChange = (e: any) => {
+        setProject({ ...project, [e.target.name]: e.target.value });
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        let formErrors: any = {};
-
-        if (!title) formErrors.title = "Title is required.";
-        if (!description) formErrors.description = "Description is required.";
-        if (!liveLink) formErrors.liveLink = "Live Link is required.";
-        if (!image) formErrors.image = "Image URL is required.";
-
-        if (Object.keys(formErrors).length > 0) {
-            setErrors(formErrors);
-            return;
-        }
-
-        // Update project data (replace with actual API request)
-        console.log({
-            title,
-            description,
-            liveLink,
-            image,
+        const res = await fetch(`http://localhost:5000/api/projects/${projectId}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(project),
         });
-
-        router.push("/projects/manage");
+        if (res.ok) {
+            alert("Project updated successfully!");
+            // Optionally redirect after updating
+            router.push("/dashboard/projects");
+        } else {
+            alert("Failed to update project.");
+        }
     };
 
     return (
@@ -69,11 +67,11 @@ const EditProjectPage = ({ params }: { params: { projectId: string } }) => {
                         <input
                             type="text"
                             id="title"
-                            value={title}
-                            onChange={(e) => setTitle(e.target.value)}
+                            name="title"
+                            value={project.title}
+                            onChange={handleChange}
                             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500 dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600"
                         />
-                        {errors.title && <p className="text-red-500 text-xs mt-1">{errors.title}</p>}
                     </div>
 
                     <div className="mb-6">
@@ -82,12 +80,12 @@ const EditProjectPage = ({ params }: { params: { projectId: string } }) => {
                         </label>
                         <textarea
                             id="description"
-                            value={description}
-                            onChange={(e) => setDescription(e.target.value)}
+                            name="description"
+                            value={project?.description}
+                            onChange={handleChange}
                             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500 dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600"
                             rows={4}
                         />
-                        {errors.description && <p className="text-red-500 text-xs mt-1">{errors.description}</p>}
                     </div>
 
                     <div className="mb-6">
@@ -97,11 +95,11 @@ const EditProjectPage = ({ params }: { params: { projectId: string } }) => {
                         <input
                             type="url"
                             id="liveLink"
-                            value={liveLink}
-                            onChange={(e) => setLiveLink(e.target.value)}
+                            name="liveLink"
+                            value={project?.liveLink}
+                            onChange={handleChange}
                             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500 dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600"
                         />
-                        {errors.liveLink && <p className="text-red-500 text-xs mt-1">{errors.liveLink}</p>}
                     </div>
 
                     <div className="mb-6">
@@ -111,11 +109,11 @@ const EditProjectPage = ({ params }: { params: { projectId: string } }) => {
                         <input
                             type="text"
                             id="image"
-                            value={image}
-                            onChange={(e) => setImage(e.target.value)}
+                            name="image"
+                            value={project?.image}
+                            onChange={handleChange}
                             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500 dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600"
                         />
-                        {errors.image && <p className="text-red-500 text-xs mt-1">{errors.image}</p>}
                     </div>
 
                     {/* Submit Button */}

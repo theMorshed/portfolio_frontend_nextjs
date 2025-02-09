@@ -1,10 +1,21 @@
-"use client"
 import Link from 'next/link';
 import { FaProjectDiagram, FaBlog } from 'react-icons/fa';
 
-const DashboardPage = () => {
-    const totalProjects = 10; // Replace with dynamic data
-    const totalBlogs = 11; // Replace with dynamic data
+const DashboardPage = async () => {
+    const projectRes = await fetch('http://localhost:5000/api/projects', {
+        next: {
+            revalidate: 10
+        }
+    });
+    const project = await projectRes.json();
+    const totalProjects = project?.data?.length; 
+    const blogRes = await fetch('http://localhost:5000/api/blogs', {
+        next: {
+            revalidate: 10
+        }
+    });
+    const blog = await blogRes.json();
+    const totalBlogs = blog?.data?.length; 
 
     return (
         <div className="min-h-screen bg-gradient-to-br py-12">

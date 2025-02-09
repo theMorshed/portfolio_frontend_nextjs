@@ -1,50 +1,12 @@
-"use client"
-import { useState } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Link from "next/link";
 import Image from "next/image";
 import { FaEdit, FaTrash } from "react-icons/fa";
 
-// Mock data for projects (replace with dynamic data from your API)
-const projects = [
-    {
-        id: 1,
-        title: "Project One",
-        description: "A description of project one",
-        liveLink: "https://www.example.com",
-        image: "https://cdn.pixabay.com/photo/2021/12/29/02/10/idea-6900632_640.png"
-    },
-    {
-        id: 2,
-        title: "Project Two",
-        description: "A description of project two",
-        liveLink: "https://www.example.com",
-        image: "https://cdn.pixabay.com/photo/2021/12/29/02/10/idea-6900632_640.png"
-    },
-    {
-        id: 3,
-        title: "Project Three",
-        description: "A description of project three",
-        liveLink: "https://www.example.com",
-        image: "https://cdn.pixabay.com/photo/2021/12/29/02/10/idea-6900632_640.png"
-    },
-    {
-        id: 4,
-        title: "Project Four",
-        description: "A description of project four",
-        liveLink: "https://www.example.com",
-        image: "https://cdn.pixabay.com/photo/2021/12/29/02/10/idea-6900632_640.png"
-    }
-];
-
-const ManageProjectsPage = () => {
-    const [projectList, setProjectList] = useState(projects);
-
-    // Function to handle deleting a project
-    const handleDelete = (id: number) => {
-        if (window.confirm("Are you sure you want to delete this project?")) {
-            setProjectList(projectList.filter(project => project.id !== id));
-        }
-    };
+const ManageProjectsPage = async () => {
+    const res = await fetch('http://localhost:5000/api/projects');
+    const project = await res.json();
+    const projectList = project?.data;
 
     return (
         <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-12">
@@ -65,7 +27,7 @@ const ManageProjectsPage = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {projectList.map((project) => (
+                        {projectList.map((project: any) => (
                             <tr key={project.id} className="border-t border-gray-200 dark:border-gray-700">
                                 <td className="py-4 px-6 text-sm font-medium text-gray-800 dark:text-gray-200">{project.title}</td>
                                 <td className="py-4 px-6 text-sm text-gray-600 dark:text-gray-400">{project.description}</td>
@@ -82,17 +44,18 @@ const ManageProjectsPage = () => {
                                     />
                                 </td>
                                 <td className="py-4 px-6 text-sm">
-                                    <Link href={`/dashboard/projects/edit/${project.id}`} passHref>
+                                    <Link href={`/dashboard/projects/edit/${project._id}`} passHref>
                                         <button className="px-4 py-2 bg-yellow-500 text-white rounded-md mr-2 hover:bg-yellow-400 transition-all duration-200">
                                             <FaEdit size={18} />
                                         </button>
                                     </Link>
-                                    <button
-                                        className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-500 transition-all duration-200"
-                                        onClick={() => handleDelete(project.id)}
-                                    >
-                                        <FaTrash size={18} />
-                                    </button>
+                                    <Link href={`/dashboard/projects/delete/${project._id}`} passHref>
+                                        <button 
+                                            className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-500 transition-all duration-200"
+                                        >
+                                            <FaTrash size={18} />
+                                        </button>
+                                    </Link>
                                 </td>
                             </tr>
                         ))}

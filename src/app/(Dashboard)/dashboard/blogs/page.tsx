@@ -1,50 +1,16 @@
-"use client"
-import { useState } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Link from "next/link";
 import Image from "next/image";
 import { FaEdit, FaTrash } from "react-icons/fa";
 
-// Mock data for blogs (replace with dynamic data from your API)
-const blogs = [
-    {
-        id: 1,
-        title: "Understanding React",
-        content: "React is a JavaScript library for building user interfaces...",
-        image: "https://images.pexels.com/photos/262508/pexels-photo-262508.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-        category: "React"
-    },
-    {
-        id: 2,
-        title: "Node.js for Backend Development",
-        content: "Node.js is an open-source, cross-platform runtime environment...",
-        image: "https://images.pexels.com/photos/262508/pexels-photo-262508.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-        category: "Node.js"
-    },
-    {
-        id: 3,
-        title: "CSS Flexbox and Grid",
-        content: "CSS Flexbox and Grid are powerful layout systems...",
-        image: "https://images.pexels.com/photos/262508/pexels-photo-262508.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-        category: "CSS"
-    },
-    {
-        id: 4,
-        title: "Introduction to MongoDB",
-        content: "MongoDB is a NoSQL database...",
-        image: "https://images.pexels.com/photos/262508/pexels-photo-262508.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-        category: "Database"
-    }
-];
-
-const ManageBlogsPage = () => {
-    const [blogList, setBlogList] = useState(blogs);
-
-    // Function to handle deleting a blog
-    const handleDelete = (id: number) => {
-        if (window.confirm("Are you sure you want to delete this blog?")) {
-            setBlogList(blogList.filter(blog => blog.id !== id));
+const ManageBlogsPage = async() => {
+    const res = await fetch('http://localhost:5000/api/blogs', {
+        next: {
+            revalidate: 10
         }
-    };
+    });
+    const blog = await res.json();
+    const blogList = blog?.data;
 
     return (
         <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-12">
@@ -65,7 +31,7 @@ const ManageBlogsPage = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {blogList.map((blog) => (
+                        {blogList.map((blog: any) => (
                             <tr key={blog.id} className="border-t border-gray-200 dark:border-gray-700">
                                 <td className="py-4 px-6 text-sm font-medium text-gray-800 dark:text-gray-200">{blog.title}</td>
                                 <td className="py-4 px-6 text-sm text-gray-600 dark:text-gray-400">{blog.category}</td>
@@ -86,8 +52,7 @@ const ManageBlogsPage = () => {
                                         </button>
                                     </Link>
                                     <button
-                                        className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-500 transition-all duration-200"
-                                        onClick={() => handleDelete(blog.id)}
+                                        className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-500 transition-all duration-200"                                        
                                     >
                                         <FaTrash size={18} />
                                     </button>
