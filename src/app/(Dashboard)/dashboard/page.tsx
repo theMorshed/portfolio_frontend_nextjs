@@ -7,7 +7,7 @@ const DashboardPage = () => {
     const totalBlogs = 11; // Replace with dynamic data
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-800 dark:to-gray-900 py-12">
+        <div className="min-h-screen bg-gradient-to-br py-12">
             <div className="container mx-auto px-6">
                 <h1 className="text-3xl font-semibold text-sky-800 dark:text-sky-200 text-center mb-10">Admin Dashboard</h1>
 

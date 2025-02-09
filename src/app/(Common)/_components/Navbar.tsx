@@ -2,10 +2,19 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { signOut } from "next-auth/react";
 
-const Navbar = () => {
+type UserProps = {
+  user?: {
+    name?: string | null;
+    email?: string | null;
+    image?: string | null;
+  }
+}
+
+const Navbar = ({session}: {session: UserProps | null}) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+    console.log(session);
     // Toggle mobile menu
     const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
@@ -21,17 +30,20 @@ const Navbar = () => {
                 <ul className="hidden sm:flex space-x-6 font-bold">
                     <Link href="/" className="hover:text-sky-950">Home</Link>
                     <Link href="/projects" className="hover:text-sky-950">Projects</Link>
-                    <Link href="/blogs" className="hover:text-sky-950">Blogs</Link>   
-                    {/* {session ? (
-                        <button onClick={handleLogout} className="hover:text-sky-950">Logout</button>
-                    ) : (
+                    <Link href="/blogs" className="hover:text-sky-950">Blogs</Link>  
+                    {session?.user? (
+                        <>
+                            <Link href="/dashboard" className="hover:text-sky-950">Dashboard</Link>
+                            <Link href="/dashboard/projects" className="hover:text-sky-950">Manage Projects</Link>
+                            <Link href="/dashboard/blogs" className="hover:text-sky-950">Manage Blogs</Link>
+                            <Link onClick={() => signOut()} href="/login" className="hover:text-sky-950">Logout</Link>
+                        </>
+                    ): (
                         <>
                             <Link href="/login" className="hover:text-sky-950">Login</Link>
                             <Link href="/register" className="hover:text-sky-950">Register</Link>
                         </>
-                    )} */}
-                    <Link href="/login" className="hover:text-sky-950">Login</Link>
-                    <Link href="/register" className="hover:text-sky-950">Register</Link>
+                    )}
                 </ul>
 
                 {/* Mobile Menu Button */}
@@ -47,16 +59,19 @@ const Navbar = () => {
                         <Link href="/" className="block hover:text-sky-950">Home</Link>
                         <Link href="/products" className="block hover:text-sky-950">Products</Link>
                         <Link href="/about" className="block hover:text-sky-950">About</Link>                    
-                        {/* {session ? (
-                            <button onClick={handleLogout} className="block hover:text-sky-950">Logout</button>
-                        ) : (
+                        {session?.user? (
+                            <>
+                                <Link href="/dashboard" className="block hover:text-sky-950">Dashboard</Link>
+                                <Link href="/dashboard/projects" className="block hover:text-sky-950">Manage Projects</Link>
+                                <Link href="/dashboard/blogs" className="block hover:text-sky-950">Manage Blogs</Link>
+                                <Link onClick={() => signOut()} href="/login" className="block hover:text-sky-950">Logout</Link>
+                            </>
+                        ): (
                             <>
                                 <Link href="/login" className="block hover:text-sky-950">Login</Link>
                                 <Link href="/register" className="block hover:text-sky-950">Register</Link>
                             </>
-                        )} */}
-                        <Link href="/login" className="block hover:text-sky-950">Login</Link>
-                        <Link href="/register" className="block hover:text-sky-950">Register</Link>
+                        )}                        
                     </ul>
                 </div>
             )}

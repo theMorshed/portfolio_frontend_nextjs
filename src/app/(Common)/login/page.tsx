@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { FaGithub, FaGoogle } from 'react-icons/fa';
 import Link from 'next/link';
+import { signIn } from 'next-auth/react';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -88,13 +89,13 @@ const Login = () => {
 
                 {/* GitHub and Google Login Icons */}
                 <div className="mt-4 flex justify-center space-x-4">
-                    <button
+                    <button onClick={() => signIn("github", {callbackUrl: "http://localhost:3000/dashboard"})}
                         className="w-12 h-12 bg-sky-800 text-white rounded-full flex items-center justify-center hover:bg-sky-900 focus:outline-none focus:ring-2 focus:ring-gray-500"
                     >
                         <FaGithub size={24} />
                     </button>
 
-                    <button
+                    <button onClick={() => signIn("google", {callbackUrl: "http://localhost:3000/dashboard"})}
                         className="w-12 h-12 bg-sky-800 text-white rounded-full flex items-center justify-center hover:bg-sky-900 focus:outline-none focus:ring-2 focus:ring-blue-400"
                     >
                         <FaGoogle size={24} />

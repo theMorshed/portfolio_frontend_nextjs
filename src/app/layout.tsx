@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import "./globals.css";
 import Navbar from "./(Common)/_components/Navbar";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/utils/authOptions";
 
 const roboto = Roboto({
   weight: "400",
@@ -14,17 +16,18 @@ export const metadata: Metadata = {
   description: "Home page for morshed portfolio",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await getServerSession(authOptions);
   return (
     <html lang="en">
       <body
         className={roboto.className}
       >
-        <Navbar />
+        <Navbar session={session} />
         {children}
       </body>
     </html>
