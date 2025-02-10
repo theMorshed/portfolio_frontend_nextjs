@@ -9,11 +9,22 @@ const ContactSection = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Here, you would handle form submission logic (like sending the form data to an API)
     setIsSubmitted(true);
     setFormData({ name: '', email: '', message: '' });
+    const res = await fetch(`http://localhost:5000/api/message/create-message`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+    });
+    if (res.ok) {
+      alert("Thanks for contacting with us, we'll get back to you soon.");
+    } else {
+        alert("Failed to create project.");
+    }    
   };
 
   return (
