@@ -4,7 +4,7 @@ import Image from "next/image";
 import { FaEdit, FaTrash } from "react-icons/fa";
 
 const ManageProjectsPage = async () => {
-    const res = await fetch(`http://localhost:5000/api/projects`);
+    const res = await fetch(`https://portfoliobackend-kappa.vercel.app/api/projects`);
     const project = await res.json();
     const projectList = project?.data;
 

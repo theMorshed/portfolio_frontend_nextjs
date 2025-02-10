@@ -17,7 +17,7 @@ const EditProjectPage = () => {
 
     useEffect(() => {
         const fetchProject = async () => {
-            const response = await fetch(`http://localhost:5000/api/projects/${projectId}`);
+            const response = await fetch(`https://portfoliobackend-kappa.vercel.app/api/projects/${projectId}`);
             const data = await response.json();
             if (data?.success) {
                 setProject(data?.data);            
@@ -33,7 +33,7 @@ const EditProjectPage = () => {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        const res = await fetch(`http://localhost:5000/api/projects/${projectId}`, {
+        const res = await fetch(`https://portfoliobackend-kappa.vercel.app/api/projects/${projectId}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",

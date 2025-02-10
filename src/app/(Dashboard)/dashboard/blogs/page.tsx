@@ -4,7 +4,7 @@ import Image from "next/image";
 import { FaEdit, FaTrash } from "react-icons/fa";
 
 const ManageBlogsPage = async() => {
-    const res = await fetch(`http://localhost:5000/api/blogs`);
+    const res = await fetch(`https://portfoliobackend-kappa.vercel.app/api/blogs`);
     const blog = await res.json();
     const blogList = blog?.data;
 

@@ -17,7 +17,7 @@ const BlogDeletePage = () => {
     useEffect(() => {
         const fetchProject = async () => {
             // Example of fetching project data from API (you'll replace this with actual API call)
-            const response = await fetch(`http://localhost:5000/api/blogs/${blogId}`);
+            const response = await fetch(`https://portfoliobackend-kappa.vercel.app/api/blogs/${blogId}`);
             const data = await response.json();
             if (data?.success) {
                 setBlog(data?.data);            
@@ -29,7 +29,7 @@ const BlogDeletePage = () => {
 
     const handleDelete = () => {
         const deleteBlog = async() => {
-            const res = await fetch(`http://localhost:5000/api/blogs/${blogId}`, {
+            const res = await fetch(`https://portfoliobackend-kappa.vercel.app/api/blogs/${blogId}`, {
                 method: "DELETE"
             });
             if (res.ok) {

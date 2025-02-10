@@ -15,7 +15,7 @@ const BlogDetailsPage = () => {
     useEffect(() => {
         const fetchBlog = async () => {
             // Example of fetching blog data from API (you'll replace this with actual API call)
-            const response = await fetch(`http://localhost:5000/api/blogs/${blogId}`);
+            const response = await fetch(`https://portfoliobackend-kappa.vercel.app/api/blogs/${blogId}`);
             const data = await response.json();
             if (data?.success) {
                 setBlog(data?.data);            

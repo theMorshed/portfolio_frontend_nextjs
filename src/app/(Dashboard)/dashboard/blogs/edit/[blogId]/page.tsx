@@ -17,7 +17,7 @@ const EditBlogPage = () => {
 
     useEffect(() => {
         const fetchProject = async () => {
-            const response = await fetch(`http://localhost:5000/api/blogs/${blogId}`);
+            const response = await fetch(`https://portfoliobackend-kappa.vercel.app/api/blogs/${blogId}`);
             const data = await response.json();
             if (data?.success) {
                 setBlog(data?.data);            
@@ -33,7 +33,7 @@ const EditBlogPage = () => {
     
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        const res = await fetch(`http://localhost:5000/api/blogs/${blogId}`, {
+        const res = await fetch(`https://portfoliobackend-kappa.vercel.app/api/blogs/${blogId}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",

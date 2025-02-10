@@ -18,7 +18,7 @@ const AddNewBlogPage = () => {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        const res = await fetch(`http://localhost:5000/api/blogs/create-blog`, {
+        const res = await fetch(`https://portfoliobackend-kappa.vercel.app/api/blogs/create-blog`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

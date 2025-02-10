@@ -2,7 +2,7 @@
 import Image from "next/image";
 
 const RecentProjects = async () => {
-  const res = await fetch(`http://localhost:5000/api/projects`);
+  const res = await fetch(`https://portfoliobackend-kappa.vercel.app/api/projects`);
   const project = await res.json();
   const projects = project?.data;
   return (
