@@ -56,8 +56,8 @@ const Navbar = ({session}: {session: UserProps | null}) => {
                 <div className="sm:hidden bg-white p-4 shadow-md">
                     <ul className="space-y-4 font-bold">
                         <Link href="/" className="block hover:text-sky-950">Home</Link>
-                        <Link href="/products" className="block hover:text-sky-950">Products</Link>
-                        <Link href="/about" className="block hover:text-sky-950">About</Link>                    
+                        <Link href="/projects" className="block hover:text-sky-950">Projects</Link>
+                        <Link href="/blog" className="block hover:text-sky-950">Blogs</Link>                    
                         {session?.user? (
                             <>
                                 <Link href="/dashboard" className="block hover:text-sky-950">Dashboard</Link>

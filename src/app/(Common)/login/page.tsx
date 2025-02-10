@@ -89,13 +89,13 @@ const Login = () => {
 
                 {/* GitHub and Google Login Icons */}
                 <div className="mt-4 flex justify-center space-x-4">
-                    <button onClick={() => signIn("github", {callbackUrl: "https://portfoliomorshed.vercel.app/dashboard"})}
+                    <button onClick={() => signIn("github", {callbackUrl: "/dashboard"})}
                         className="w-12 h-12 bg-sky-800 text-white rounded-full flex items-center justify-center hover:bg-sky-900 focus:outline-none focus:ring-2 focus:ring-gray-500"
                     >
                         <FaGithub size={24} />
                     </button>
 
-                    <button onClick={() => signIn("google", {callbackUrl: "https://portfoliomorshed.vercel.app/dashboard"})}
+                    <button onClick={() => signIn("google", {callbackUrl: "/dashboard"})}
                         className="w-12 h-12 bg-sky-800 text-white rounded-full flex items-center justify-center hover:bg-sky-900 focus:outline-none focus:ring-2 focus:ring-blue-400"
                     >
                         <FaGoogle size={24} />
