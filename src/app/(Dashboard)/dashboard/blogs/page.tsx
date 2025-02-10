@@ -4,11 +4,7 @@ import Image from "next/image";
 import { FaEdit, FaTrash } from "react-icons/fa";
 
 const ManageBlogsPage = async() => {
-    const res = await fetch('http://localhost:5000/api/blogs', {
-        next: {
-            revalidate: 10
-        }
-    });
+    const res = await fetch(`http://localhost:5000/api/blogs`);
     const blog = await res.json();
     const blogList = blog?.data;
 
@@ -32,7 +28,7 @@ const ManageBlogsPage = async() => {
                     </thead>
                     <tbody>
                         {blogList.map((blog: any) => (
-                            <tr key={blog.id} className="border-t border-gray-200 dark:border-gray-700">
+                            <tr key={blog._id} className="border-t border-gray-200 dark:border-gray-700">
                                 <td className="py-4 px-6 text-sm font-medium text-gray-800 dark:text-gray-200">{blog.title}</td>
                                 <td className="py-4 px-6 text-sm text-gray-600 dark:text-gray-400">{blog.category}</td>
                                 <td className="py-4 px-6 text-sm text-gray-600 dark:text-gray-400">{blog.content.slice(0, 50)}...</td>
@@ -46,16 +42,18 @@ const ManageBlogsPage = async() => {
                                     />
                                 </td>
                                 <td className="py-4 px-6 text-sm">
-                                    <Link href={`/dashboard/blogs/edit/${blog.id}`} passHref>
+                                    <Link href={`/dashboard/blogs/edit/${blog._id}`} passHref>
                                         <button className="px-4 py-2 bg-yellow-500 text-white rounded-md mr-2 hover:bg-yellow-400 transition-all duration-200">
                                             <FaEdit size={18} />
                                         </button>
                                     </Link>
-                                    <button
-                                        className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-500 transition-all duration-200"                                        
-                                    >
-                                        <FaTrash size={18} />
-                                    </button>
+                                    <Link href={`/dashboard/blogs/delete/${blog._id}`} passHref>
+                                        <button
+                                            className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-500 transition-all duration-200"                                        
+                                        >
+                                            <FaTrash size={18} />
+                                        </button>
+                                    </Link>
                                 </td>
                             </tr>
                         ))}

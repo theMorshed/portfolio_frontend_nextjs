@@ -4,7 +4,7 @@ import Image from "next/image";
 import { FaEdit, FaTrash } from "react-icons/fa";
 
 const ManageProjectsPage = async () => {
-    const res = await fetch('http://localhost:5000/api/projects');
+    const res = await fetch(`http://localhost:5000/api/projects`);
     const project = await res.json();
     const projectList = project?.data;
 
@@ -28,7 +28,7 @@ const ManageProjectsPage = async () => {
                     </thead>
                     <tbody>
                         {projectList.map((project: any) => (
-                            <tr key={project.id} className="border-t border-gray-200 dark:border-gray-700">
+                            <tr key={project._id} className="border-t border-gray-200 dark:border-gray-700">
                                 <td className="py-4 px-6 text-sm font-medium text-gray-800 dark:text-gray-200">{project.title}</td>
                                 <td className="py-4 px-6 text-sm text-gray-600 dark:text-gray-400">{project.description}</td>
                                 <td className="py-4 px-6 text-sm text-blue-600 dark:text-blue-400">

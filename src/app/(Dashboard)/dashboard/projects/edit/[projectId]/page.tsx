@@ -15,10 +15,8 @@ const EditProjectPage = () => {
         image: ""
     });
 
-    // Fetch project data for editing
     useEffect(() => {
         const fetchProject = async () => {
-            // Example of fetching project data from API (you'll replace this with actual API call)
             const response = await fetch(`http://localhost:5000/api/projects/${projectId}`);
             const data = await response.json();
             if (data?.success) {

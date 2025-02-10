@@ -5,7 +5,7 @@ import Image from "next/image";
 
 const Banner = () => {
   return (
-    <div className="hidden md:grid md:grid-cols-2 md:items-center gap-[30px] min-h-screen">
+    <div className="hidden md:grid md:grid-cols-2 md:items-center gap-[30px] min-h-screen container mx-auto">
       <div>
         <h4 className="text-sky-800 dark:text-body-color text-[22px] md:text-[25px] lg:text-[4xl] lg:leading-[1.5] font-bold mb-[1.5rem] xl:mb-[10px]">
           I am Morshed
@@ -30,7 +30,7 @@ const Banner = () => {
         <div className="flex items-center gap-[30px] lg:gap-[25px] mt-5 flex-wrap lg:flex-nowrap md:mt-[30px] lg:mt-[50px]">
           <div className="flex">
             <a
-              href="#"
+              href="https://docs.google.com/document/d/1N8mkYC4Q1irUfjZsJRk56R1igiL0WR9LA2ZtdbogT98/export?format=pdf"
               className="text-[15px] font-medium text-sky-800 hover:text-body-color capitalize py-[17px] px-[35px] bg-transparent hover:bg-sky-800 rounded-full leading-[1] border border-sky-800 text-nowrap tracking-[1px] hover:text-white"
             >
               Download CV
@@ -41,7 +41,8 @@ const Banner = () => {
             <ul className="flex gap-x-5">
               <li>
                 <a
-                  href="#"
+                  href="https://www.facebook.com/themorshedctg"
+                  target="_blank"
                   className="text-sky-800 hover:text-body-color border border-sky-800 w-[35px] h-[35px] rounded-full flex items-center justify-center overflow-hidden relative z-0 after:absolute after:top-1/2 after:left-1/2 after:-translate-x-1/2 after:-translate-y-1/2 after:w-full after:h-full after:scale-0 after:bg-sky-800 hover:after:scale-105 after:transition-all after:duration-300 after:z-[-1] after:rounded-full hover:text-white"
                 >
                   <FaFacebook />
@@ -49,7 +50,8 @@ const Banner = () => {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="https://www.linkedin.com/in/themorshed/"
+                  target="_blank"
                   className="text-sky-800 hover:text-body-color border border-sky-800 w-[35px] h-[35px] rounded-full flex items-center justify-center overflow-hidden relative z-0 after:absolute after:top-1/2 after:left-1/2 after:-translate-x-1/2 after:-translate-y-1/2 after:w-full after:h-full after:scale-0 after:bg-sky-800 hover:after:scale-105 after:transition-all after:duration-300 after:z-[-1] after:rounded-full hover:text-white"
                 >
                   <FaLinkedinIn />
@@ -57,7 +59,8 @@ const Banner = () => {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="https://github.com/theMorshed"
+                  target="_blank"
                   className="text-sky-800 hover:text-body-color border border-sky-800 w-[35px] h-[35px] rounded-full flex items-center justify-center overflow-hidden relative z-0 after:absolute after:top-1/2 after:left-1/2 after:-translate-x-1/2 after:-translate-y-1/2 after:w-full after:h-full after:scale-0 after:bg-sky-800 hover:after:scale-105 after:transition-all after:duration-300 after:z-[-1] after:rounded-full hover:text-white"
                 >
                   <FaGithub />

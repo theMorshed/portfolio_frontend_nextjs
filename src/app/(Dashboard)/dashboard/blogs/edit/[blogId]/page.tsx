@@ -2,51 +2,51 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 
-const EditBlogPage = ({ params }: { params: { blogId: string } }) => {
-    const [title, setTitle] = useState("");
-    const [content, setContent] = useState("");
-    const [author, setAuthor] = useState("");
-    const [isPublished, setIsPublished] = useState(false);
-    const [errors, setErrors] = useState<any>({});
+const EditBlogPage = () => {
     const router = useRouter();
+    // const {projectId}: any = use(params);
+    const {blogId} = useParams();
+    const [blog, setBlog] = useState({
+        title: "",
+        content: "",
+        category: "",
+        image: ""
+    });
 
     useEffect(() => {
-        const fetchBlog = async () => {
-            const response = await fetch(`/api/blogs/${params.blogId}`);
-            const blog = await response.json();
-
-            setTitle(blog.title);
-            setContent(blog.content);
-            setAuthor(blog.author);
-            setIsPublished(blog.isPublished);
+        const fetchProject = async () => {
+            const response = await fetch(`http://localhost:5000/api/blogs/${blogId}`);
+            const data = await response.json();
+            if (data?.success) {
+                setBlog(data?.data);            
+            }
         };
 
-        fetchBlog();
-    }, [params.blogId]);
-
-    const handleSubmit = (e: React.FormEvent) => {
+        fetchProject();
+    }, [blogId]);
+    
+    const handleChange = (e: any) => {
+        setBlog({ ...blog, [e.target.name]: e.target.value });
+    };
+    
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        let formErrors: any = {};
-
-        if (!title) formErrors.title = "Title is required.";
-        if (!content) formErrors.content = "Content is required.";
-        if (!author) formErrors.author = "Author is required.";
-
-        if (Object.keys(formErrors).length > 0) {
-            setErrors(formErrors);
-            return;
-        }
-
-        console.log({
-            title,
-            content,
-            author,
-            isPublished,
+        const res = await fetch(`http://localhost:5000/api/blogs/${blogId}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(blog),
         });
-
-        router.push("/blogs/manage");
+        if (res.ok) {
+            alert("Blog updated successfully!");
+            // Optionally redirect after updating
+            router.push("/dashboard/blogs");
+        } else {
+            alert("Failed to update blog.");
+        }
     };
 
     return (
@@ -64,11 +64,11 @@ const EditBlogPage = ({ params }: { params: { blogId: string } }) => {
                         <input
                             type="text"
                             id="title"
-                            value={title}
-                            onChange={(e) => setTitle(e.target.value)}
+                            name="title"
+                            value={blog.title}
+                            onChange={handleChange}
                             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500 dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600"
                         />
-                        {errors.title && <p className="text-red-500 text-xs mt-1">{errors.title}</p>}
                     </div>
 
                     <div className="mb-6">
@@ -77,40 +77,41 @@ const EditBlogPage = ({ params }: { params: { blogId: string } }) => {
                         </label>
                         <textarea
                             id="content"
-                            value={content}
-                            onChange={(e) => setContent(e.target.value)}
+                            name="content"
+                            value={blog.content}
+                            onChange={handleChange}
                             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500 dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600"
                             rows={6}
                         />
-                        {errors.content && <p className="text-red-500 text-xs mt-1">{errors.content}</p>}
                     </div>
 
                     <div className="mb-6">
-                        <label htmlFor="author" className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
-                            Author Name
+                        <label htmlFor="liveLink" className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                            Category
                         </label>
                         <input
                             type="text"
-                            id="author"
-                            value={author}
-                            onChange={(e) => setAuthor(e.target.value)}
+                            id="liveLink"
+                            name="category"
+                            value={blog.category}
+                            onChange={handleChange}
                             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500 dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600"
                         />
-                        {errors.author && <p className="text-red-500 text-xs mt-1">{errors.author}</p>}
                     </div>
 
-                    <div className="mb-6 flex items-center">
-                        <input
-                            type="checkbox"
-                            id="isPublished"
-                            checked={isPublished}
-                            onChange={(e) => setIsPublished(e.target.checked)}
-                            className="mr-2"
-                        />
-                        <label htmlFor="isPublished" className="text-sm font-semibold text-gray-700 dark:text-gray-300">
-                            Publish Blog
+                    <div className="mb-6">
+                        <label htmlFor="image" className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                            Blog Image URL
                         </label>
-                    </div>
+                        <input
+                            type="url"
+                            id="image"
+                            name="image"
+                            value={blog?.image}
+                            onChange={handleChange}
+                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500 dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600"
+                        />
+                    </div>                    
 
                     <div className="flex justify-center">
                         <button

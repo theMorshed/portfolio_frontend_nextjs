@@ -3,39 +3,36 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-// Dummy function to simulate blog creation (replace with API call)
-const createBlog = (blogData: any) => {
-    console.log("Blog created:", blogData);
-    // After successful creation, you can redirect or show success message
-};
-
 const AddNewBlogPage = () => {
-    const [title, setTitle] = useState("");
-    const [content, setContent] = useState("");
-    const [category, setCategory] = useState("");
-    const [image, setImage] = useState("");
-    const [error, setError] = useState<string | null>(null);
-
+    const [blog, setBlog] = useState({
+        title: "",
+        content: "",
+        category: "",
+        image: ""
+    });
     const router = useRouter();
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
+    const handleChange = (e: any) => {
+        setBlog({ ...blog, [e.target.name]: e.target.value });
+    };
 
-        // Basic validation
-        if (!title || !content || !category || !image) {
-            setError("All fields are required.");
-            return;
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        const res = await fetch(`http://localhost:5000/api/blogs/create-blog`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(blog),
+        });
+        if (res.ok) {
+            alert("Blog created successfully!");
+            // Optionally redirect after updating
+            router.push("/dashboard/blogs");
+        } else {
+            alert("Failed to create blog.");
         }
 
-        const blogData = { title, content, category, image };
-        createBlog(blogData);
-
-        // After submitting, redirect or reset form
-        setTitle("");
-        setContent("");
-        setCategory("");
-        setImage("");
-        setError(null);
         router.push("/dashboard/blogs");
     };
 
@@ -45,13 +42,6 @@ const AddNewBlogPage = () => {
                 <h1 className="text-3xl font-semibold text-sky-800 dark:text-sky-200 text-center mb-10">
                     Add New Blog
                 </h1>
-
-                {/* Error Message */}
-                {error && (
-                    <div className="mb-4 text-red-600 text-center">
-                        <p>{error}</p>
-                    </div>
-                )}
 
                 <form
                     onSubmit={handleSubmit}
@@ -67,8 +57,8 @@ const AddNewBlogPage = () => {
                         <input
                             type="text"
                             id="title"
-                            value={title}
-                            onChange={(e) => setTitle(e.target.value)}
+                            name="title"
+                            onChange={handleChange}
                             className="w-full p-3 border border-gray-300 dark:border-gray-700 rounded-md bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200"
                             placeholder="Enter the blog title"
                         />
@@ -83,8 +73,8 @@ const AddNewBlogPage = () => {
                         </label>
                         <textarea
                             id="content"
-                            value={content}
-                            onChange={(e) => setContent(e.target.value)}
+                            name="content"
+                            onChange={handleChange}
                             className="w-full p-3 border border-gray-300 dark:border-gray-700 rounded-md bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200"
                             placeholder="Enter the blog content"
                             rows={6}
@@ -101,8 +91,8 @@ const AddNewBlogPage = () => {
                         <input
                             type="text"
                             id="category"
-                            value={category}
-                            onChange={(e) => setCategory(e.target.value)}
+                            name="category"
+                            onChange={handleChange}
                             className="w-full p-3 border border-gray-300 dark:border-gray-700 rounded-md bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200"
                             placeholder="Enter the blog category"
                         />
@@ -118,8 +108,8 @@ const AddNewBlogPage = () => {
                         <input
                             type="text"
                             id="image"
-                            value={image}
-                            onChange={(e) => setImage(e.target.value)}
+                            name="image"
+                            onChange={handleChange}
                             className="w-full p-3 border border-gray-300 dark:border-gray-700 rounded-md bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200"
                             placeholder="Enter the image URL"
                         />
