@@ -13,7 +13,7 @@ const ContactSection = () => {
     e.preventDefault();
     setIsSubmitted(true);
     setFormData({ name: '', email: '', message: '' });
-    const res = await fetch(`http://localhost:5000/api/message/create-message`, {
+    const res = await fetch(`https://portfoliobackend-kappa.vercel.app/api/message/create-message`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
