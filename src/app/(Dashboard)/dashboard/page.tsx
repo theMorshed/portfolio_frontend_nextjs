@@ -52,10 +52,10 @@ const DashboardPage = async () => {
 
                 {/* Optionally, add links to manage projects and blogs */}
                 <div className="mt-8 flex justify-center gap-8">
-                    <Link href="/projects" className="px-6 py-3 bg-sky-800 text-white rounded-lg font-medium shadow-md hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-sky-500">
+                    <Link href="/dashboard/projects" className="px-6 py-3 bg-sky-800 text-white rounded-lg font-medium shadow-md hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-sky-500">
                         Manage Projects
                     </Link>
-                    <Link href="/blog" className="px-6 py-3 bg-sky-800 text-white rounded-lg font-medium shadow-md hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-sky-500">
+                    <Link href="/dashboard/blogs" className="px-6 py-3 bg-sky-800 text-white rounded-lg font-medium shadow-md hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-sky-500">
                         Manage Blogs
                     </Link>
                 </div>
