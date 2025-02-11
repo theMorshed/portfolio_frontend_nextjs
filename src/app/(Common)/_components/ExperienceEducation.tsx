@@ -6,41 +6,27 @@ import { FaBriefcase, FaGraduationCap } from "react-icons/fa";
 
 const experiences = [
   {
-    title: "Laboratory Engineer",
+    title: "Laboratory Incharge",
     company: "Clinical Laboratory",
-    duration: "2014 - Present",
+    duration: "2015 - Present",
     description: "Performing tests, signing reports, and ensuring accuracy in medical diagnostics.",
     icon: <FaBriefcase />,
-  },
-  {
-    title: "Software Engineer",
-    company: "Tech Solutions Ltd.",
-    duration: "2020 - Present",
-    description: "Developing scalable web applications, optimizing backend services, and implementing authentication systems.",
-    icon: <FaBriefcase />,
-  },
+  }
 ];
 
 const education = [
   {
-    title: "Bachelor's in Engineering",
-    institution: "Your University",
-    duration: "2010 - 2014",
-    description: "Specialized in laboratory technology and diagnostics.",
-    icon: <FaGraduationCap />,
-  },
-  {
-    title: "Bachelor's in Computer Science",
-    institution: "Tech University",
-    duration: "2016 - 2020",
-    description: "Focused on algorithms, software development, and full-stack engineering.",
+    title: "Bachelor's in Laboratory Medicine",
+    institution: "University of Chattagram",
+    duration: "2009 - 2014",
+    description: "Focused on science and medicine.",
     icon: <FaGraduationCap />,
   },
 ];
 
 const TimelineItem = ({ item }: { item: any }) => (
   <motion.div
-    className="relative pl-12 pb-12 border-l-4 border-sky-600 dark:border-sky-400"
+    className="relative pl-12 pb-12"
     initial={{ opacity: 0, x: -30 }}
     whileInView={{ opacity: 1, x: 0 }}
     viewport={{ once: true }}

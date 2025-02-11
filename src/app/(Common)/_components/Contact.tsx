@@ -37,7 +37,7 @@ const ContactSection = () => {
               I’d love to hear from you! Whether you have a question or just want to connect, feel free to reach out.
             </p>
             <div className="text-gray-700">
-              <p>Email: <strong>your-email@example.com</strong></p>
+              <p>Email: <strong>themorshedctg@gmail.com</strong></p>
               <p>Phone: <strong>(123) 456-7890</strong></p>
             </div>
           </div>
