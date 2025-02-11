@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "./(Common)/_components/Navbar";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/utils/authOptions";
+import Footer from "./(Common)/_components/Footer";
 
 const roboto = Roboto({
   weight: "400",
@@ -22,6 +23,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const session = await getServerSession(authOptions);
+  console.log(session);
   return (
     <html lang="en">
       <body
@@ -29,6 +31,7 @@ export default async function RootLayout({
       >
         <Navbar session={session} />
         {children}
+        <Footer />
       </body>
     </html>
   );

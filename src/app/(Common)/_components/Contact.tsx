@@ -28,7 +28,7 @@ const ContactSection = () => {
   };
 
   return (
-    <section className="py-32 bg-gray-50">
+    <section className="py-32 bg-gray-50 min-h-screen">
       <div className="max-w-6xl mx-auto px-6">
         <h2 className="text-3xl font-semibold text-center text-sky-800 mb-12">Contact Me</h2>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">

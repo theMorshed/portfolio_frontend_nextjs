@@ -5,7 +5,7 @@ import Image from "next/image";
 
 const Banner = () => {
   return (
-    <div className="hidden md:grid md:grid-cols-2 md:items-center gap-[30px] min-h-screen container mx-auto">
+    <div className="md:grid md:grid-cols-2 md:items-center gap-[30px] min-h-screen container mx-auto">
       <div>
         <h4 className="text-sky-800 dark:text-body-color text-[22px] md:text-[25px] lg:text-[4xl] lg:leading-[1.5] font-bold mb-[1.5rem] xl:mb-[10px]">
           I am Morshed
