@@ -9,7 +9,7 @@ const RecentProjects = async () => {
     <section className="py-16 bg-gray-50 dark:bg-gray-900">
       <div className="container mx-auto px-6">
         <h2 className="text-3xl md:text-4xl font-bold text-center text-sky-800 dark:text-gray-200 mb-12">
-          Recent Projects
+          Featured Projects
         </h2>
 
         <div className="grid md:grid-cols-3 gap-8">

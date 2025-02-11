@@ -56,13 +56,15 @@ export const authOptions: NextAuthOptions = {
 //   callbacks: {
 //     async session({ session, token }) {
 //       if (session.user) {
-//         (session.user as { id: string }).id = token.sub as string; // Ensure token.sub is a string
-//       }  // Ensures user ID is available in session
+//         // Use name instead of id
+//         (session.user as { name: string }).name = token.sub as string; 
+//       }
 //       return session;
 //     },
 //     async jwt({ token, user }) {
 //       if (user) {
-//         token.id = user.id;
+//         // Store name in token (or any other value you prefer)
+//         token.sub = user.name as string; // Assuming you want to store the name in the JWT token
 //       }
 //       return token;
 //     }
