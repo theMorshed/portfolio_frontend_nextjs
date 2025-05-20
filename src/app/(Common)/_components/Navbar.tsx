@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import { useState } from "react";
 import Link from "next/link";
-import { signOut } from "next-auth/react";
+// import { signOut } from "next-auth/react";
 
 type UserProps = {
   user?: {
@@ -27,7 +28,7 @@ const Navbar = ({session}: {session: UserProps | null}) => {
 
                 {/* Desktop Menu */}
                 <ul className="hidden sm:flex space-x-6 font-bold">                     
-                    {session?.user? (
+                    {/* {session?.user? (
                         <>
                             <Link href="/dashboard" className="hover:text-sky-950">Dashboard</Link>
                             <Link href="/dashboard/projects" className="hover:text-sky-950">Manage Projects</Link>
@@ -35,16 +36,16 @@ const Navbar = ({session}: {session: UserProps | null}) => {
                             <Link href="/dashboard/message" className="hover:text-sky-950">Manage Messages</Link>
                             <Link onClick={() => signOut()} href="/login" className="hover:text-sky-950">Logout</Link>
                         </>
-                    ): (
+                    ): ( */}
                         <>
                             <Link href="/" className="hover:text-sky-950">Home</Link>
+                            <Link href="/blogs" className="hover:text-sky-950">Blogs</Link> 
                             <Link href="/projects" className="hover:text-sky-950">Projects</Link>
                             <Link href="/contact" className="hover:text-sky-950">Contact</Link>
-                            <Link href="/blogs" className="hover:text-sky-950">Blogs</Link> 
                             {/* <Link href="/login" className="hover:text-sky-950">Login</Link> */}
                             {/* <Link href="/register" className="hover:text-sky-950">Register</Link> */}
                         </>
-                    )}
+                    {/* )} */}
                 </ul>
 
                 {/* Mobile Menu Button */}
@@ -57,7 +58,7 @@ const Navbar = ({session}: {session: UserProps | null}) => {
             {isMenuOpen && (
                 <div className="sm:hidden bg-white p-4 shadow-md">
                     <ul className="space-y-4 font-bold">                   
-                        {session?.user? (
+                        {/* {session?.user? (
                             <>
                                 <Link href="/dashboard" className="block hover:text-sky-950">Dashboard</Link>
                                 <Link href="/dashboard/projects" className="block hover:text-sky-950">Manage Projects</Link>
@@ -65,16 +66,16 @@ const Navbar = ({session}: {session: UserProps | null}) => {
                                 <Link href="/dashboard/message" className="block hover:text-sky-950">Manage Messages</Link>
                                 <Link onClick={() => signOut()} href="/login" className="block hover:text-sky-950">Logout</Link>
                             </>
-                        ): (
+                        ): ( */}
                             <>
                                 <Link href="/" className="block hover:text-sky-950">Home</Link>
+                                <Link href="/blog" className="block hover:text-sky-950">Blogs</Link>                             
                                 <Link href="/projects" className="block hover:text-sky-950">Projects</Link>
                                 <Link href="/contact" className="block hover:text-sky-950">Contact</Link>
-                                <Link href="/blog" className="block hover:text-sky-950">Blogs</Link>                             
                                 {/* <Link href="/login" className="block hover:text-sky-950">Login</Link> */}
                                 {/* <Link href="/register" className="block hover:text-sky-950">Register</Link> */}
                             </>
-                        )}                        
+                        {/* )}                         */}
                     </ul>
                 </div>
             )}

@@ -15,20 +15,12 @@ type Education = {
 const dummyEducation: Education[] = [
   {
     _id: "1",
-    degree: "B.Sc. in Computer Science",
-    institution: "University of Innovation",
-    description: "Focused on software engineering, data structures, and system design.",
-    startDate: "2010-08-01",
+    degree: "B.Sc. in Laboratory Medicine",
+    institution: "Chittagong Institute of Medical Technology",
+    description: "Focused on Pathology, histopathogy, laboratory medicine.",
+    startDate: "2009-03-01",
     endDate: "2014-06-30",
-  },
-  {
-    _id: "2",
-    degree: "HSC (Science)",
-    institution: "National College",
-    description: "Studied core science subjects including Physics, Chemistry, and Math.",
-    startDate: "2008-06-01",
-    endDate: "2010-06-01",
-  },
+  }
 ];
 
 export const EducationSection = () => {

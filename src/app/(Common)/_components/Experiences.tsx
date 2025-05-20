@@ -68,7 +68,7 @@ export const ExperienceSection = () => {
             <div key={exp._id} className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
               <h3 className="text-xl font-semibold">{exp.designation}</h3>
               <p className="text-sm text-gray-600 dark:text-gray-400">
-                {exp.company} | {formatDate(exp.startDate)} - {formatDate(exp.endDate)}
+                {exp.company} | {formatDate(exp.startDate)} - {(exp.endDate)? formatDate(exp.endDate) : 'Present'}
               </p>
               <p className="mt-2">{exp.description}</p>
             </div>

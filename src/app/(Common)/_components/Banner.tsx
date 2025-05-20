@@ -25,7 +25,7 @@ const Banner = () => {
           />
         </div>
         <p className="text-xl leading-[1.5] text-primary-color-light dark:text-body-color max-w-[540px]">
-          My name is Morshed and a passionate backend engineer with a strong foundation in TypeScript, Node.js, and MongoDB. With expertise in building scalable applications, I'm currently working on projects like custom authentication systems, and e-commerce platforms. I enjoys solving complex challenges, writing functional code, and continuously improving his skills in system design and security.
+          My name is Morshed and a passionate backend engineer with a strong foundation in JavaScript, TypeScript, Node.js, MongoDB and PostgreSQL. With expertise in building scalable applications, I'm currently working on projects like custom authentication systems, and e-commerce platforms. I enjoys solving complex challenges, writing functional code, and continuously improving my skills in system design and security.
         </p>
         {/* Action and social */}
         <div className="flex items-center gap-[30px] lg:gap-[25px] mt-5 flex-wrap lg:flex-nowrap md:mt-[30px] lg:mt-[50px]">
