@@ -38,7 +38,11 @@ const BlogDetailsPage = () => {
                     className="w-full h-96 object-cover mt-6 rounded-lg"
                 />
                 )}
-                <p className="mt-6 text-lg text-gray-600 dark:text-gray-300">{blog.content}</p>
+                <div
+                  className="text-gray-600 dark:text-gray-400 text-lg mt-10 prose"
+                  dangerouslySetInnerHTML={{ __html: blog.content }}
+                />
+                {/* <p className="mt-6 text-lg text-gray-600 dark:text-gray-300">{blog.content}</p> */}
             </div>
         </div>
     );

@@ -41,8 +41,8 @@ const Navbar = ({session}: {session: UserProps | null}) => {
                             <Link href="/projects" className="hover:text-sky-950">Projects</Link>
                             <Link href="/contact" className="hover:text-sky-950">Contact</Link>
                             <Link href="/blogs" className="hover:text-sky-950">Blogs</Link> 
-                            <Link href="/login" className="hover:text-sky-950">Login</Link>
-                            <Link href="/register" className="hover:text-sky-950">Register</Link>
+                            {/* <Link href="/login" className="hover:text-sky-950">Login</Link> */}
+                            {/* <Link href="/register" className="hover:text-sky-950">Register</Link> */}
                         </>
                     )}
                 </ul>
@@ -71,8 +71,8 @@ const Navbar = ({session}: {session: UserProps | null}) => {
                                 <Link href="/projects" className="block hover:text-sky-950">Projects</Link>
                                 <Link href="/contact" className="block hover:text-sky-950">Contact</Link>
                                 <Link href="/blog" className="block hover:text-sky-950">Blogs</Link>                             
-                                <Link href="/login" className="block hover:text-sky-950">Login</Link>
-                                <Link href="/register" className="block hover:text-sky-950">Register</Link>
+                                {/* <Link href="/login" className="block hover:text-sky-950">Login</Link> */}
+                                {/* <Link href="/register" className="block hover:text-sky-950">Register</Link> */}
                             </>
                         )}                        
                     </ul>

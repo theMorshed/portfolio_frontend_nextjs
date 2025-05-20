@@ -17,7 +17,7 @@ const Banner = () => {
         </h1>
         <div className="flex md:hidden justify-center items-center my-[30px]">
           <Image
-            src={"https://www.marketing-a2z.com/wp-content/uploads/2019/01/testimonial-1.jpg"}
+            src={"https://i.ibb.co.com/rGSYKMm3/todays-photo-removebg-preview.png"}
             alt="banner image"
             className="rounded-[38px] border-2 border-sky-800 hover:border-sky-950 rotate-[4.29deg] hover:rotate-0 transition-all duration-300 max-w-[80%]"
             width={500}  // Add width and height for Next.js Image component optimization
@@ -73,7 +73,7 @@ const Banner = () => {
       </div>
       <div className="hidden md:flex md:justify-center md:items-center relative after:absolute after:bottom-0 after:left-0 after:w-[220px] after:h-[220px] after:blur-[150px] after:rounded-[50%] after:bg-gradient-circle after:-z-1 after:-mt-[5%] after:-mr-[5%]">
         <Image
-          src={"https://www.marketing-a2z.com/wp-content/uploads/2019/01/testimonial-1.jpg"}
+          src={"https://i.ibb.co.com/rGSYKMm3/todays-photo-removebg-preview.png"}
           alt="banner image"
           className="rounded-[38px] border-2 border-sky-800 hover:border-sky-950 rotate-[4.29deg] hover:rotate-0 transition-all duration-300"
           width={500}  // Add width and height for Next.js Image component optimization
